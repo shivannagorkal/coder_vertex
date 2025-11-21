@@ -1,26 +1,133 @@
-@import "tailwindcss";
+/* styles/globals.css - clean modern UI for Code Vortex */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Root palette */
+:root{
+  --bg: #0f1724;          /* dark navy background */
+  --panel: #0b1220;       /* panel dark */
+  --muted: #98a0b3;
+  --text: #e6eef8;
+  --accent: #2563eb;      /* blue */
+  --glass: rgba(255,255,255,0.04);
+  --success: #10b981;
+  --danger: #ef4444;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Reset */
+* { box-sizing: border-box; }
+html,body,#__next { height:100%; margin:0; }
+body{
+  background: linear-gradient(180deg,var(--bg), #071226 150%);
+  color:var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Top bar */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+}
+.brand{ display:flex; gap:12px; align-items:center; }
+.logo{
+  width:48px; height:48px; border-radius:10px;
+  background:linear-gradient(135deg,var(--accent), #7c3aed);
+  display:flex; align-items:center; justify-content:center; font-weight:700; color:white;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+}
+.brand h1{ margin:0; font-size:20px; }
+.subtitle{ color:var(--muted); font-size:12px; margin-top:2px; }
+
+/* Deploy button */
+.deploy{
+  color:var(--text); text-decoration:none; font-size:14px; padding:8px 14px; border-radius:8px;
+  border:1px solid rgba(255,255,255,0.04); background:var(--glass);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Page container */
+.container{
+  max-width:1100px;
+  margin:28px auto;
+  padding:16px;
 }
+
+/* Controls */
+.controls{
+  display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px;
+}
+.controls .left{ display:flex; gap:10px; align-items:center; }
+.controls select{
+  background:rgba(255,255,255,0.03); color:var(--text); border:1px solid rgba(255,255,255,0.04);
+  padding:8px 10px; border-radius:8px; min-width:150px;
+}
+.btn, .btn:active, .btn:focus{ outline:none; }
+.btn{ background:var(--accent); color:white; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; box-shadow:0 6px 18px rgba(37,99,235,0.12); }
+.btn[disabled]{ opacity:0.6; cursor:not-allowed; }
+
+/* workspace layout */
+.workspace{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:20px;
+}
+
+/* editor */
+.editor .label, .output .label{ color:var(--muted); font-size:13px; margin-bottom:8px; display:block; }
+.codebox{
+  width:100%;
+  min-height:240px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));
+  color:var(--text); border:1px solid rgba(255,255,255,0.03); border-radius:8px; padding:14px; font-family:var(--mono); font-size:13px;
+  resize:vertical;
+}
+
+/* output */
+.result-box{
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.03);
+  padding:14px;
+  border-radius:8px;
+  min-height:160px;
+  white-space:pre-wrap;
+  font-family:var(--mono);
+  font-size:13px;
+  color:var(--text);
+  overflow:auto;
+}
+
+/* placeholder muted text */
+.muted{ color:var(--muted); }
+
+/* output actions */
+.output-actions{ display:flex; gap:8px; margin-top:10px; }
+.ghost{
+  background:transparent; color:var(--accent); border:1px solid rgba(255,255,255,0.03);
+  padding:8px 10px; border-radius:6px; cursor:pointer; text-decoration:none;
+}
+
+/* footer */
+.footer{ margin-top:18px; color:var(--muted); display:flex; justify-content:space-between; font-size:13px; }
+
+/* responsive */
+@media (max-width:900px){
+  .workspace{ grid-template-columns: 1fr; }
+  .controls{ flex-direction:column; align-items:flex-start; gap:8px; }
+}
+
+/* Fix dropdown menu visibility */
+select, option {
+  color: #ffffff !important;  /* White text */
+  background-color: #1e293b !important; /* Slate-800 background */
+}
+
+/* On hover */
+option:hover {
+  background-color: #334155 !important; /* Slate-700 */
+}
+
